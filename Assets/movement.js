@@ -32,7 +32,6 @@ function Update () {
 }
 
 function OnGUI() {
-    var oldY = Camera.main.transform.position.y;
     if (Input.GetKey("w")) keyW = true;
     else keyW = false;
     if (Input.GetKey("a")) keyA = true;
@@ -41,8 +40,6 @@ function OnGUI() {
     else keyS = false;
     if (Input.GetKey("d")) keyD = true;
     else keyD = false;
-
-    Camera.main.transform.position.y = oldY;
 
     transform.Rotate(-Input.GetAxis("Mouse Y") / sens, Input.GetAxis("Mouse X") / sens, 0, Space.Self);
     transform.LookAt(camera.transform.position + camera.transform.forward, Vector3.up);
@@ -57,6 +54,7 @@ function OnGUI() {
 }
 
 function updateView() {
+    var oldY = Camera.main.transform.position.y;
     if (keyW) 
         transform.Translate(0, 0, playerSpeed, Camera.main.transform);
     if (keyA)
@@ -65,6 +63,7 @@ function updateView() {
         transform.Translate(0, 0, -playerSpeed, Camera.main.transform);
     if (keyD)
         transform.Translate(playerSpeed, 0, 0, Camera.main.transform);
+    Camera.main.transform.position.y = oldY;
     /*
     var longitude = moveX;
     var latitude = moveY;
